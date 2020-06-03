@@ -1,0 +1,4 @@
+
+class PcTemplate extends bo {
+
+}

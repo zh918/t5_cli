@@ -7,15 +7,18 @@ class Bootstrap {
   }
 
   createPcTemplate(path) {
-    console.log(path);
-    download('zh918/t5-pc-template', path, function(err) {
-      if (err) {
-        console.log(err);
-      }
-
-      console.log('执行完成');
-
+    return new Promise(function(resolve, reject){
+      download('zh918/t5-pc-template', path, function(err) {
+        if (err) {
+          console.log(err);
+          resolve(false);
+        }
+        resolve(true);
+        // console.log('*******************执行完成*******************');
+  
+      });
     });
+
   }
 }
 
