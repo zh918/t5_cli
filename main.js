@@ -30,7 +30,9 @@ program
     // 2.监听用户输入选项
     process.stdout.write("请选择需要生成的模板编号:")
     stdin.on("data", async function(data){
-      const inputString = data.toString().slice(0, -1);
+      const inputString = data.slice(0, data.length - 1).toString('utf-8');
+      console.log(data);
+      console.log('d=>', inputString);
       if (!(/[0-9]+$/.test(inputString))) {
         console.log(chalk.red("请输入正确的模板编号"));
         return;
@@ -39,7 +41,7 @@ program
       stdin.pause();
       console.log(chalk.blue(`你选择的模板为:${templateArray[inputString - 1]}`));
       let count = 1;
-      let max = 5;
+      let max = 4;
       let timeoutId = setInterval(()=>{
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
@@ -47,8 +49,8 @@ program
         else if (count == 2) process.stdout.write(chalk.red("正在下载模板，请稍等."));
         else if (count == 3) process.stdout.write(chalk.red("正在下载模板，请稍等.."));
         else process.stdout.write(chalk.red("正在下载模板，请稍等..."));
-
-        count++; 
+        
+        count++;
         if (count > max) count = 1;
       }, 1000);
 
