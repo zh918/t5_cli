@@ -17,9 +17,7 @@ program
     // 1.定义可生成哪些模板，供用户选择
     const templateArray = [
       't5-pc-template',
-      't5-mobile-template',
-      't5-wechat-mp-template',
-      't5-nest-service'
+      't5-mobile-template'
     ];
 
     console.log(chalk.gray("*******************模板如下：*******************"));
@@ -30,12 +28,16 @@ program
     // 2.监听用户输入选项
     process.stdout.write("请选择需要生成的模板编号:")
     stdin.on("data", async function(data){
-      const inputString = data.slice(0, data.length - 1).toString('utf-8');
-      console.log(data);
-      console.log('d=>', inputString);
-      if (!(/[0-9]+$/.test(inputString))) {
-        console.log(chalk.red("请输入正确的模板编号"));
-        return;
+      let inputString = data.slice(0, data.length - 1).toString('utf-8').replace(/ /g,'');
+      // console.log(templateArray[inputString-1]);
+      // console.log('d=>', inputString);
+      // if (!(/[0-9]+$/.test(inputString))) {
+      //   console.log(chalk.red("请输入正确的模板编号"));
+      //   return;
+      // }
+      if (inputString != 1 && inputString != 2) {
+        console.log(chalk.red("输入有误，将直接导出第一个模板"));
+        inputString = 1;
       }
       
       stdin.pause();
@@ -69,7 +71,16 @@ program
         });
       } 
       else if (inputString == 2) {
-
+        await bootstrap.createMobileTemplate(projectPath).then(flag=>{
+          clearInterval(timeoutId);
+          console.log('\n');
+          if (flag) {
+            console.log(chalk.green('*******************执行完成*******************'));
+          }
+          else {
+            console.log(chalk.red('*******************执行失败，请重试*******************'));
+          }
+        });
       }
       else if (inputString == 3) {
 
