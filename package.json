@@ -1,6 +1,6 @@
 {
   "name": "t5-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "开发模板文件生成",
   "main": "main.js",
   "bin": {
