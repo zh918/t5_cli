@@ -36,7 +36,7 @@ program
       //   return;
       // }
       if (inputString != 1 && inputString != 2) {
-        console.log(chalk.red("输入有误，将直接导出第一个模板"));
+        console.log(chalk.red("输入有误,将直接导出第一个模板"));
         inputString = 1;
       }
       
